@@ -7,3 +7,7 @@ from django.http import HttpResponse
 def index(request):
 
     return render(request, 'soogle/index.html')
+
+def page1(request):
+
+    return render(request, 'soogle/page1.html')
