@@ -15,6 +15,7 @@
 		{% load static %}
 		<link rel="stylesheet" href="{% static 'assets/css/main.css' %}" />
 		<noscript><link rel="stylesheet" href="{% static 'assets/css/noscript.css' %}" /></noscript>
+		<link href="{% static 'https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css' %}" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
 	</head>
 	<body class="is-preload">
 
@@ -57,9 +58,25 @@
 						<!-- Mobile -->
 							<article id="mobile">
 								<h2 class="major">모바일 요금제 비교</h2>
-								<span class="image main"><img src="/static/images/pic02.jpg" alt="" /></span>
-								<p>Adipiscing magna sed dolor elit. Praesent eleifend dignissim arcu, at eleifend sapien imperdiet ac. Aliquam erat volutpat. Praesent urna nisi, fringila lorem et vehicula lacinia quam. Integer sollicitudin mauris nec lorem luctus ultrices.</p>
-								<p>Nullam et orci eu lorem consequat tincidunt vivamus et sagittis libero. Mauris aliquet magna magna sed nunc rhoncus pharetra. Pellentesque condimentum sem. In efficitur ligula tate urna. Maecenas laoreet massa vel lacinia pellentesque lorem ipsum dolor. Nullam et orci eu lorem consequat tincidunt. Vivamus et sagittis libero. Mauris aliquet magna magna sed nunc rhoncus amet feugiat tempus.</p>
+<!--								<span class="image main"><img src="/static/images/pic02.jpg" alt="" /></span>-->
+
+								<h3 style="margin-bottom:7px;">분류</h3>
+									<select onchange="categoryChange(this)" id="people" name="people" style="margin-bottom:10px;">
+									    <option value="0">=== Select ===</option>
+									    <option value="1">One</option>
+									    <option value="2">Two</option>
+									    <option value="3">Three</option>
+										<option value="4">four</option>
+									</select>
+
+								<!-- 상단의 four을 누르면 나타날 인풋 박스 -->
+								<input type="text" id="etc" name="etc">
+
+								<h3 style="margin-bottom:7px;">분류</h3>
+
+									<select id="good">
+										<option>=== Select ===</option>
+									</select>
 							</article>
 
 						<!-- Internet -->
@@ -360,6 +377,42 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 			<script src="/static/assets/js/breakpoints.min.js"></script>
 			<script src="/static/assets/js/util.js"></script>
 			<script src="/static/assets/js/main.js"></script>
+			<script>
+				function categoryChange(e) {
+					var good_0 = ["=== Select ==="];
+					var good_1 = ["=== Select ===","지수", "제니", "로제", "리사"];
+					var good_2 = ["=== Select ===","빅토리아", "엠버", "루나", "크리스탈"];
+					var good_3 = ["=== Select ===","LE", "하니", "정화", "혜린", "솔지"];
+					var target = document.getElementById("good");
 
+					if(e.value == "1") var d = good_1;
+					else if(e.value == "2") var d = good_2;
+					else if(e.value == "3") var d = good_3;
+					else if(e.value == "0") var d = good_0;
+
+					target.options.length = 0;
+
+					for (x in d) {
+						var opt = document.createElement("option");
+						opt.value = d[x];
+						opt.innerHTML = d[x];
+						target.appendChild(opt);
+					}
+				}
+			</script>
+
+			$(function(){
+				  //입력박스 숨어있다가
+			$("#etc").hide();
+			$("#people").change(function() {
+							//기타를 선택하면 등장
+					if($("#people").val() == "four") {
+						$("#etc").show();
+					}  else {
+						$("#etc").hide();
+					}
+				})
+			});
+			</script>
 	</body>
 </html>
